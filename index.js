@@ -13,10 +13,10 @@ import profesores from './src/controllers/profesores/profesores.services.js'
 import alumnos from './src/controllers/alumnos/alumnos.services.js'
 import carreras from './src/controllers/carreras/carreras.services.js';
 
-app.use('/', controllers)
-app.use('/profesores', profesores)
-app.use('/alumnos', alumnos)
-app.use('/carreras', carreras)
+app.use('/api', controllers)
+app.use('/api/profesores', profesores)
+app.use('/api/alumnos', alumnos)
+app.use('/api/carreras', carreras)
 
 const port = process.env.PORT || 4000;
 

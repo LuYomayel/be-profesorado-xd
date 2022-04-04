@@ -17,6 +17,18 @@ router.get('/', (req, res) => {
   
 });
 
+router.get('/:idAlumno', (req, res) => {
+    
+  alumnosFunctions.getAlumno(req.params.idAlumno)
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(err => {
+    res.status(500).send(err);
+  })
+
+});
+
 router.post('/', (req, res) => {
     alumnosFunctions.addAlumno(req.body)
     .then(response => {
