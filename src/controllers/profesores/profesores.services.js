@@ -17,6 +17,18 @@ router.get('/', (req, res) => {
   
 });
 
+router.get('/:id', (req, res) => {
+    
+  profesoresFunctions.getProfesor(req.params.id)
+  .then(response => {
+    res.status(200).send(response);
+  })
+  .catch(err => {
+    res.status(500).send(err);
+  })
+
+});
+
 router.post('/', (req, res) => {
     profesoresFunctions.addProfesor(req.body)
     .then(response => {

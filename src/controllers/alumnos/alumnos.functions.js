@@ -39,14 +39,13 @@ function getAlumno(idAlumno){
     
     return new Promise((resolve, reject) => {
         try {
-            
             const connection = mysql.createConnection(configSql);
             connection.connect((err) => {
                 if (err) {
                     reject(err);
                 } else {
                     const table = 'alumnos';
-                    const query = `SELECT idAlumno,nombreAlumno,apellidoAlumno,direccionAlumno,emailAlumno,telefonoAlumno,dniAlumno, fechaNacAlumno FROM ${table} where idAlumno = ${idAlumno} LIMIT 1;`;
+                    const query = `SELECT idAlumno,nombreAlumno,apellidoAlumno,direccionAlumno,emailAlumno,telAlumno,dniAlumno, fechaNacAlumno FROM ${table} where idAlumno = ${idAlumno} LIMIT 1;`;
                     
                     connection.query(query, (err, results) => {
                         if (err) {
@@ -74,7 +73,7 @@ function addAlumno(body){
                     reject(err);
                 } else {
                     const table = 'alumnos';
-                    const query = `INSERT INTO ${table}(dniAlumno,nombreAlumno,apellidoAlumno,fechaNacAlumno,direccionAlumno,emailAlumno, telefonoAlumno) values(${body.dniAlumno}, '${body.nombreAlumno}', '${body.apellidoAlumno}', '${body.fechaNacAlumno}','${body.direccionAlumno}','${body.emailAlumno}', ${body.telefonoAlumno}) ;`;
+                    const query = `INSERT INTO ${table}(dniAlumno,nombreAlumno,apellidoAlumno,fechaNacAlumno,direccionAlumno,emailAlumno, telAlumno) values(${body.dniAlumno}, '${body.nombreAlumno}', '${body.apellidoAlumno}', '${body.fechaNacAlumno}','${body.direccionAlumno}','${body.emailAlumno}', ${body.telAlumno}) ;`;
                     connection.query(query, (err, results) => {
                         if (err) {
                             reject(err);
@@ -102,7 +101,7 @@ function updateAlumno(params, body){
                 }else{
                     console.log(body);
                     const table = 'alumnos';
-                    const query = `update ${table} set nombreAlumno = '${body.nombreAlumno}', apellidoAlumno='${body.apellidoAlumno}', fechaNacAlumno='${body.fechaNacAlumno}', direccionAlumno='${body.direccionAlumno}', emailAlumno = '${body.emailAlumno}', telefonoAlumno=${body.telefonoAlumno} where idAlumno = ${params.id}`;
+                    const query = `update ${table} set nombreAlumno = '${body.nombreAlumno}', apellidoAlumno='${body.apellidoAlumno}', fechaNacAlumno='${body.fechaNacAlumno}', direccionAlumno='${body.direccionAlumno}', emailAlumno = '${body.emailAlumno}', telAlumno='${body.telAlumno}' where idAlumno = ${params.id}`;
                     connection.query(query, (err,result)=>{
                         if(err)reject(err);
                         else{

@@ -68,7 +68,7 @@ function updateProfesor(params, body){
                     reject(err);
                 }else{
                     const table = 'profesores';
-                    const query = `update ${table} set nombreProfesor = '${body.nombreProfesor}', apellidoProfesor='${body.apellidoProfesor}', fechaNacProfesor='${fechaNacProfesor}', direccionProfesor='${body.direccionProfesor}', emailProfesor = '${body.emailProfesor}' where idProfesor = ${params.id}`;
+                    const query = `update ${table} set nombreProfesor = '${body.nombreProfesor}', apellidoProfesor='${body.apellidoProfesor}', fechaNacProfesor='${body.fechaNacProfesor}', direccionProfesor='${body.direccionProfesor}', emailProfesor = '${body.emailProfesor}', telProfesor = '${body.telProfesor}' where idProfesor = ${params.id}`;
                     connection.query(query, (err,result)=>{
                         if(err)reject(err);
                         else{
@@ -110,4 +110,33 @@ function deleteProfesor(params){
     })
 }
 
-export default { getProfesores, addProfesor, updateProfesor, deleteProfesor }
+function getProfesor(id){
+    
+    
+    return new Promise((resolve, reject) => {
+        try {
+            const connection = mysql.createConnection(configSql);
+            connection.connect((err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    const table = 'profesores';
+                    const query = `SELECT * FROM ${table} where estado = 1 and idProfesor = ${id};`;
+                    connection.query(query, (err, results) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            connection.end(() => {
+                                resolve(results);
+                            });
+                        }
+                    });
+                }
+            });
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
+
+export default { getProfesores, addProfesor, updateProfesor, deleteProfesor, getProfesor }
