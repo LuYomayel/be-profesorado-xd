@@ -39,7 +39,7 @@ router.put('/:id', (req, res ) => {
 })
 
 router.delete('/:id', (req, res ) => {
-    materiasFunctions.deleteCarrera(req.params)
+    materiasFunctions.deleteMateria(req.params)
     .then( response => {
         res.status(200).send(response)
     })
